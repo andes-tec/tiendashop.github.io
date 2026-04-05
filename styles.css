@@ -652,3 +652,72 @@ footer {
         height: 180px;
     }
 }
+/* ===== BOTÓN FLOTANTE DEL CARRITO ===== */
+.floating-cart-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 1.5rem;
+    background: #2c3e66;
+    color: white;
+    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+}
+
+.floating-cart-btn:hover {
+    background: #1e2a3a;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.floating-cart-btn span {
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 0.1rem 0.4rem;
+    min-width: 22px;
+    text-align: center;
+}
+
+/* Animación de entrada */
+.floating-cart-btn.show {
+    display: flex !important;
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+    .floating-cart-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.3rem;
+        bottom: 1.5rem;
+        right: 1rem;
+    }
+    .floating-cart-btn span {
+        font-size: 0.75rem;
+        min-width: 18px;
+    }
+}
