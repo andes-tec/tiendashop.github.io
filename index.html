@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>TiendaShop · A tu casa</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🛍️ TiendaShop</h1>
+            <p>Productos directos a tu casa</p>
+        </header>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="cart-summary" id="cartSummary">
+                🛒 Carrito: <span id="cartCount">0</span> productos · <span id="cartTotal">$0</span>
+            </div>
+            <button id="viewCartBtn" class="btn-outline">Ver carrito</button>
+        </div>
+
+        <!-- ===== SLIDER MINIMALISTA (IMÁGENES LOCALES) ===== -->
+        <div class="slider-container">
+            <div class="slider-track" id="sliderTrack">
+                <div class="slider-slide">
+                    <img src="slider1.jpeg" alt="Promoción 1" onerror="this.src='https://placehold.co/1200x400/e2e8f0/1e2a3a?text=Slide+1'">
+                    <div class="slider-caption"></div>
+                </div>
+                <div class="slider-slide">
+                    <img src="slider2.jpeg" alt="Promoción 2" onerror="this.src='https://placehold.co/1200x400/e2e8f0/1e2a3a?text=Slide+2'">
+                    <div class="slider-caption"></div>
+                </div>
+                <div class="slider-slide">
+                    <img src="slider3.jpeg" alt="Promoción 3" onerror="this.src='https://placehold.co/1200x400/e2e8f0/1e2a3a?text=Slide+3'">
+                    <div class="slider-caption"></div>
+                </div>
+            </div>
+            <button class="slider-btn prev" id="sliderPrev">‹</button>
+            <button class="slider-btn next" id="sliderNext">›</button>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+
+        <!-- Filtro de categorías -->
+        <div class="categories-filter" id="categoriesContainer">
+            <button class="cat-btn active" data-cat="all">🛍️ Todos los productos</button>
+        </div>
+
+        <!-- Contenedor de productos -->
+        <div id="productsContainer" class="products-grid">
+            <div class="loading">⏳ Cargando productos...</div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>✨ Los pedidos se registran automáticamente.</p>
+            <p><small>TiendaShop · By::Aquiles · 2026</small></p>
+            <p><small>Contacto · 3875048697</small></p>
+        </footer>
+    </div>
+
+    <!-- MODALES -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content cart-modal">
+            <div class="modal-header">
+                <h2>🛒 Tu carrito</h2>
+                <button class="close-modal" id="closeCartModalBtn">&times;</button>
+            </div>
+            <div id="cartItemsList" class="cart-items-list"></div>
+            <div class="cart-footer">
+                <div class="cart-total">Total: <strong id="modalCartTotal">$0</strong></div>
+                <button id="checkoutBtn" class="btn-primary">Finalizar pedido</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content checkout-modal">
+            <div class="modal-header">
+                <h2>📋 Datos de envío</h2>
+                <button class="close-modal" id="closeCheckoutModalBtn">&times;</button>
+            </div>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label for="customerName">Nombre completo *</label>
+                    <input type="text" id="customerName" required placeholder="Ej: Ana González">
+                </div>
+                <div class="form-group">
+                    <label for="customerAddress">Dirección de envío *</label>
+                    <input type="text" id="customerAddress" required placeholder="Calle, número, ciudad">
+                </div>
+                <button type="submit" class="btn-primary">✅ Confirmar pedido y enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toastMessage" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
