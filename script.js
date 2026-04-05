@@ -41,6 +41,10 @@ const sliderPrev = document.getElementById('sliderPrev');
 const sliderNext = document.getElementById('sliderNext');
 const sliderDots = document.getElementById('sliderDots');
 
+// ==================== ELEMENTOS DEL BOTÓN FLOTANTE ====================
+const floatingCartBtn = document.getElementById('floatingCartBtn');
+const floatingCartCount = document.getElementById('floatingCartCount');
+
 // ==================== FECHA Y HORA LOCAL ====================
 function getFormattedDateTime() {
     const ahora = new Date();
@@ -102,6 +106,11 @@ function updateCartUI() {
     cartCountSpan.innerText = totalItems;
     cartTotalSpan.innerText = `$${totalPrice.toFixed(2)}`;
     saveCart();
+    
+    // Actualizar contador del botón flotante
+    if (floatingCartCount) {
+        floatingCartCount.innerText = totalItems;
+    }
 }
 
 // ==================== MANEJO DE CARRITO ====================
@@ -256,7 +265,7 @@ function initLocalSlider() {
     function resetAutoSlide() {
         if (slides.length > 1) {
             if (slideInterval) clearInterval(slideInterval);
-            slideInterval = setInterval(() => nextSlide(), 3000);
+            slideInterval = setInterval(() => nextSlide(), 5000);
         }
     }
     
@@ -278,6 +287,26 @@ function initLocalSlider() {
     }
     
     startAutoSlide();
+}
+
+// ==================== BOTÓN FLOTANTE DEL CARRITO ====================
+function initFloatingCartButton() {
+    if (!floatingCartBtn) return;
+    
+    // Mostrar/ocultar según el scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            floatingCartBtn.classList.add('show');
+        } else {
+            floatingCartBtn.classList.remove('show');
+        }
+    });
+    
+    // Al hacer click, abre el carrito igual que el botón normal
+    floatingCartBtn.addEventListener('click', () => {
+        renderCartModal();
+        cartModal.classList.add('active');
+    });
 }
 
 // ==================== LECTURA DE PRODUCTOS DESDE GOOGLE SHEETS ====================
@@ -479,8 +508,9 @@ function escapeHtml(str) {
 async function init() {
     loadCartFromStorage();
     updateCartUI();
-    await fetchProducts();      // Cargar productos desde Google Sheets
-    initLocalSlider();          // Iniciar slider con imágenes locales del HTML
+    await fetchProducts();           // Cargar productos desde Google Sheets
+    initLocalSlider();               // Iniciar slider con imágenes locales del HTML
+    initFloatingCartButton();        // Iniciar botón flotante del carrito
     initEventListeners();
 }
 
